@@ -109,7 +109,7 @@ else:
 # Sidebar for uploading image
 uploaded_file = st.file_uploader("", type=["png", "jpg", "jpeg"], accept_multiple_files=False, key="file_uploader", help="Upload an image for glaucoma detection (Max size: 200 MB)")
 styled_text = "<p style='font-weight: bold; font-size: larger; background-color: white; padding: 5px;'>Upload Image</p>"
-components.html(f'<div style="display: none;">{uploaded_file}</div>{styled_text}', height=50)
+components.html(f'<div style="display: none;"><br>{uploaded_file}</div>{styled_text}', height=50)
 # Main content area
 if uploaded_file is not None:
     # Display uploaded image
