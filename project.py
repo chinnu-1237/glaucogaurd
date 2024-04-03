@@ -51,6 +51,21 @@ background_image_style = f"""
         height: 100vh;  /* Adjust the height as needed */
         width: 100vw;   /* Adjust the width as needed */
     }}
+    .blue-bg {{
+        background-color: darkblue; /* Changed to dark blue */
+        padding: 20px;  /* Increased padding */
+        margin-bottom: 20px; /* Added margin */
+        color: white;   /* Text color */
+    }}
+    .white-bg {{
+        background-color: white; /* Changed to white */
+    }}
+    .bold-text {{
+        font-weight: bold; /* Added bold font weight */
+        font-size: larger; /* Increased font size */
+        padding: 5px; /* Adjusted padding */
+        color: black; /* Text color */
+    }}
     .red-bg {{
         background-color: red;
         padding: 10px;  /* Adjust the padding as needed */
@@ -76,7 +91,7 @@ background_image_style = f"""
 st.markdown(background_image_style, unsafe_allow_html=True)
 
 # Set title in dark mode
-st.markdown("<h1 style='text-align: center; color: #ecf0f1;'>GlaucoGuard: Gaining Clarity in Glaucoma diagnosis through Deep Learning</h1>", unsafe_allow_html=True)
+st.markdown("<h1 class='blue-bg' style='text-align: center; color: #ecf0f1;'>GlaucoGuard: Gaining Clarity in Glaucoma diagnosis through Deep Learning</h1>", unsafe_allow_html=True)
 st.markdown("---")
 
 # Paragraph with content about uploading fundus images
@@ -92,15 +107,26 @@ else:
 
 # Sidebar for uploading image
 uploaded_file = st.file_uploader("Upload Image", type=["png", "jpg", "jpeg"], accept_multiple_files=False, key="file_uploader", help="Upload an image for glaucoma detection (Max size: 200 MB)")
-
+file_uploader_style = """
+<style>
+div[data-baseweb="button"] > button > div {
+    font-weight: bold; /* Make text bold */
+    font-size: larger; /* Increase font size */
+    background-color: white !important; /* Set background color to white */
+    border: 2px solid darkblue !important; /* Add border */
+    border-radius: 5px; /* Add border radius */
+}
+</style>
+"""
+st.markdown(file_uploader_style, unsafe_allow_html=True)
 # Main content area
 if uploaded_file is not None:
     # Display uploaded image
     original_image = Image.open(uploaded_file)
-    st.image(original_image, caption="Uploaded Image", use_column_width=True)
+    st.image(original_image, caption="<p style='font-weight: bold; background-color: white; padding: 5px;'>Uploaded Image: <span style='background-color: white;'>{filename}</span></p>", use_column_width=True)
 
     # Perform glaucoma detection
-    with st.spinner("Detecting glaucoma..."):
+    with st.spinner("<p style='font-weight: bold; font-size: larger; color: white;'>Detecting glaucoma...</p>"):
         processed_image = preprocess_image(original_image)
         prediction = predict_glaucoma(processed_image, classifier)
 
@@ -121,10 +147,10 @@ if uploaded_file is not None:
 if not all_results.empty:
     st.markdown("---")
     st.subheader("Detection Results")
-    st.table(all_results.style.applymap(lambda x: 'color: red' if x == 'Glaucoma' else 'color: green', subset=['Prediction']))
+    st.table(all_results.style.applymap(lambda x: 'color: red' if x == 'Glaucoma' else 'color: green', subset=['Prediction']).set_table_styles([{'selector': 'table', 'props': [('background', 'white')]}]))
 
     # Pie chart
-    st.markdown("### Pie Chart")
+    st.markdown("<h3 style='color: white;'>Pie Chart</h3>", unsafe_allow_html=True)
     pie_data = all_results['Prediction'].value_counts()
     fig, ax = plt.subplots()
     colors = ['green' if label == 'Normal' else 'red' for label in pie_data.index]
@@ -133,7 +159,7 @@ if not all_results.empty:
     st.pyplot(fig)
 
     # Bar chart
-    st.markdown("### Bar Chart")
+    st.markdown("<h3 style='color: white;'>Bar Chart</h3>", unsafe_allow_html=True)
     bar_data = all_results['Prediction'].value_counts()
     fig, ax = plt.subplots()
     colors = ['green' if label == 'Normal' else 'red' for label in bar_data.index]
@@ -144,7 +170,7 @@ if not all_results.empty:
 
     # Option to download prediction report
     st.markdown("---")
-    st.subheader("Download Prediction Report")
+    st.subheader("<p style='background-color: white;'>Download Prediction Report</p>", unsafe_allow_html=True)
     csv = all_results.to_csv(index=False)
     st.download_button(
         label="Download CSV",
