@@ -106,7 +106,7 @@ else:
     all_results = pd.read_csv("results.csv")
 
 # Sidebar for uploading image
-uploaded_file = st.file_uploader("Upload Image", type=["png", "jpg", "jpeg"], accept_multiple_files=False, key="file_uploader", help="Upload an image for glaucoma detection (Max size: 200 MB)")
+uploaded_file = st.file_uploader(<h1 class='white-bg' style='font-size: 20px; color: black;'>Upload Image</h1>", type=["png", "jpg", "jpeg"], accept_multiple_files=False, key="file_uploader", help="Upload an image for glaucoma detection (Max size: 200 MB)")
 file_uploader_style = """
 <style>
 div[data-baseweb="button"] > button > div {
