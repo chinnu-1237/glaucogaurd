@@ -107,14 +107,15 @@ else:
     all_results = pd.read_csv("results.csv")
 
 # Sidebar for uploading image
-uploaded_file = st.file_uploader("", type=["png", "jpg", "jpeg"], accept_multiple_files=False, key="file_uploader", help="Upload an image for glaucoma detection (Max size: 200 MB)")
 styled_text = "<p style='font-weight: bold; font-size: larger; background-color: white; padding: 5px;'>Upload Image</p>"
 components.html(f'<div style="display: none;"><br>{uploaded_file}</div>{styled_text}', height=50)
+uploaded_file = st.file_uploader("", type=["png", "jpg", "jpeg"], accept_multiple_files=False, key="file_uploader", help="Upload an image for glaucoma detection (Max size: 200 MB)")
+
 # Main content area
 if uploaded_file is not None:
     # Display uploaded image
     original_image = Image.open(uploaded_file)
-    st.image(original_image, caption="<p style='font-weight: bold; background-color: white; padding: 5px;'>Uploaded Image: <span style='background-color: white;'>{filename}</span></p>", use_column_width=True)
+    st.image(original_image, caption="Uploaded Image", use_column_width=True)
 
     # Perform glaucoma detection
     with st.spinner("<p style='font-weight: bold; font-size: larger; color: white;'>Detecting glaucoma...</p>"):
