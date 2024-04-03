@@ -107,9 +107,7 @@ else:
     all_results = pd.read_csv("results.csv")
 
 # Sidebar for uploading image
-styled_text = "<p style='font-weight: bold; font-size: larger; background-color: white; padding: 5px;'>Upload Image</p>"
-components.html(f'<div style="display: none;"><br>{uploaded_file}</div>{styled_text}', height=50)
-uploaded_file = st.file_uploader("", type=["png", "jpg", "jpeg"], accept_multiple_files=False, key="file_uploader", help="Upload an image for glaucoma detection (Max size: 200 MB)")
+uploaded_file = st.file_uploader("Upload Image", type=["png", "jpg", "jpeg"], accept_multiple_files=False, key="file_uploader", help="Upload an image for glaucoma detection (Max size: 200 MB)")
 
 # Main content area
 if uploaded_file is not None:
@@ -118,7 +116,7 @@ if uploaded_file is not None:
     st.image(original_image, caption="Uploaded Image", use_column_width=True)
 
     # Perform glaucoma detection
-    with st.spinner("<p style='font-weight: bold; font-size: larger; color: white;'>Detecting glaucoma...</p>"):
+    with st.spinner("Detecting glaucoma..."):
         processed_image = preprocess_image(original_image)
         prediction = predict_glaucoma(processed_image, classifier)
 
@@ -139,10 +137,10 @@ if uploaded_file is not None:
 if not all_results.empty:
     st.markdown("---")
     st.subheader("Detection Results")
-    st.table(all_results.style.applymap(lambda x: 'color: red' if x == 'Glaucoma' else 'color: green', subset=['Prediction']).set_table_styles([{'selector': 'table', 'props': [('background', 'white')]}]))
+    st.table(all_results.style.applymap(lambda x: 'color: red' if x == 'Glaucoma' else 'color: green', subset=['Prediction']))
 
     # Pie chart
-    st.markdown("<h3 style='color: white;'>Pie Chart</h3>", unsafe_allow_html=True)
+    st.markdown("### Pie Chart")
     pie_data = all_results['Prediction'].value_counts()
     fig, ax = plt.subplots()
     colors = ['green' if label == 'Normal' else 'red' for label in pie_data.index]
@@ -151,7 +149,7 @@ if not all_results.empty:
     st.pyplot(fig)
 
     # Bar chart
-    st.markdown("<h3 style='color: white;'>Bar Chart</h3>", unsafe_allow_html=True)
+    st.markdown("### Bar Chart")
     bar_data = all_results['Prediction'].value_counts()
     fig, ax = plt.subplots()
     colors = ['green' if label == 'Normal' else 'red' for label in bar_data.index]
@@ -162,7 +160,7 @@ if not all_results.empty:
 
     # Option to download prediction report
     st.markdown("---")
-    st.subheader("<p style='background-color: white;'>Download Prediction Report</p>", unsafe_allow_html=True)
+    st.subheader("Download Prediction Report")
     csv = all_results.to_csv(index=False)
     st.download_button(
         label="Download CSV",
