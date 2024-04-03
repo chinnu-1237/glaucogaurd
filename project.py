@@ -137,23 +137,7 @@ if uploaded_file is not None:
 if not all_results.empty:
     st.markdown("---")
     st.subheader("Detection Results")
-    st.markdown("""
-        <style>
-            .st-eb {
-                background-color: white;
-            }
-            .st-ec {
-                background-color: white;
-            }
-            .st-ed {
-                background-color: white;
-            }
-            .st-el {
-                background-color: white;
-            }
-        </style>
-    """, unsafe_allow_html=True)
-    st.table(all_results.style.applymap(lambda x: 'color: red' if x == 'Glaucoma' else 'color: green', subset=['Prediction']))
+    st.table(all_results.style.applymap(lambda x: 'color: red' if x == 'Glaucoma' else 'color: green', subset=['Prediction']),{'background-color': 'white'})
 
     # Pie chart
     st.markdown("<h3  class='blue-bg' style='color: white;'>Pie Chart</h3>", unsafe_allow_html=True)
