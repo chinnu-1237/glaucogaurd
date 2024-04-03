@@ -6,6 +6,7 @@ import numpy as np
 import pandas as pd
 from tensorflow.keras.models import load_model
 import gdown
+import streamlit.components.v1 as components
 import os
 
 # Function to load and preprocess image
@@ -106,11 +107,9 @@ else:
     all_results = pd.read_csv("results.csv")
 
 # Sidebar for uploading image
-uploaded_file = st.file_uploader("Upload Image", type=["png", "jpg", "jpeg"], accept_multiple_files=False, key="file_uploader", help="Upload an image for glaucoma detection (Max size: 200 MB)")
-file_uploader_style ="""
-<p style='font-weight: bold; font-size: larger; background-color: white; padding: 5px;'>Upload Image</p>
-"""
-st.markdown(file_uploader_style, unsafe_allow_html=True)
+uploaded_file = st.file_uploader("", type=["png", "jpg", "jpeg"], accept_multiple_files=False, key="file_uploader", help="Upload an image for glaucoma detection (Max size: 200 MB)")
+styled_text = "<p style='font-weight: bold; font-size: larger; background-color: white; padding: 5px;'>Upload Image</p>"
+components.html(f'<div style="display: none;">{uploaded_file}</div>{styled_text}', height=50)
 # Main content area
 if uploaded_file is not None:
     # Display uploaded image
