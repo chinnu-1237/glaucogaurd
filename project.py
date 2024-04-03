@@ -106,17 +106,9 @@ else:
     all_results = pd.read_csv("results.csv")
 
 # Sidebar for uploading image
-uploaded_file = st.file_uploader("<h1 class='white-bg' style='font-size: 20px; color: black;'>Upload Image</h1>", type=["png", "jpg", "jpeg"], accept_multiple_files=False, key="file_uploader", help="Upload an image for glaucoma detection (Max size: 200 MB)")
-file_uploader_style = """
-<style>
-div[data-baseweb="button"] > button > div {
-    font-weight: bold; /* Make text bold */
-    font-size: larger; /* Increase font size */
-    background-color: white !important; /* Set background color to white */
-    border: 2px solid darkblue !important; /* Add border */
-    border-radius: 5px; /* Add border radius */
-}
-</style>
+uploaded_file = st.file_uploader("Upload Image", type=["png", "jpg", "jpeg"], accept_multiple_files=False, key="file_uploader", help="Upload an image for glaucoma detection (Max size: 200 MB)")
+file_uploader_style ="""
+<p style='font-weight: bold; font-size: larger; background-color: white; padding: 5px;'>Upload Image</p>
 """
 st.markdown(file_uploader_style, unsafe_allow_html=True)
 # Main content area
