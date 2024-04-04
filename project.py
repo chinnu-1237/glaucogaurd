@@ -150,7 +150,7 @@ if uploaded_file is not None:
     unsafe_allow_html=True
 )
 
-st.dataframe(all_results)
+    st.dataframe(all_results)
     new_result = pd.DataFrame({"Image": [uploaded_file.name], "Prediction": [prediction]})
     all_results = pd.concat([new_result, all_results], ignore_index=True)
 
