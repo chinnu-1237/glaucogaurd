@@ -109,7 +109,23 @@ else:
 # Sidebar for uploading image
 st.markdown("""<p style='font-size: 20px;  background-color: pink; color: black;'>Upload an image for glaucoma detection (Max size: 200 MB)</p>""", unsafe_allow_html=True)
 uploaded_file = st.file_uploader(" ",type=["png", "jpg", "jpeg"], accept_multiple_files=False, key="file_uploader", help="Upload an image for glaucoma detection (Max size: 200 MB)")
-
+st.markdown("""
+    <style>
+        .stHelp.st-cc:before {
+            content: "?";
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            line-height: 20px;
+            text-align: center;
+            border-radius: 50%;
+            background-color: white;
+            color: black;
+            font-weight: bold;
+            margin-right: 5px;
+        }
+    </style>
+""", unsafe_allow_html=True)
 # Main content area
 if uploaded_file is not None:
     # Display uploaded image
