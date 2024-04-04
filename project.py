@@ -144,6 +144,8 @@ if uploaded_file is not None:
     <style>
         .dataframe {{ 
             background-color: white;
+            width: 100%; /* Set width to 100% */
+            padding: 10px; /* Add padding */
         }}
     </style>
     """, 
@@ -156,7 +158,7 @@ if uploaded_file is not None:
     if not all_results.empty:
       st.markdown("---")
       st.subheader("Detection Results")
-      st.table(all_results.style.applymap(lambda x: 'color: red' if x == 'Glaucoma' else 'color: green', subset=['Prediction']))
+      st.dataframe(all_results.style.applymap(lambda x: 'color: red' if x == 'Glaucoma' else 'color: green', subset=['Prediction']))
 
     # Save updated results to CSV
     all_results.to_csv("results.csv", index=False)
@@ -165,7 +167,7 @@ if uploaded_file is not None:
 
 
     # Pie chart
-    st.markdown("<h3  class='blue-bg' style='color: white;'>Pie Chart</h3>", unsafe_allow_html=True)
+    st.markdown("<h3  style='color: white; background-color: pink'>Pie Chart</h3>", unsafe_allow_html=True)
     pie_data = all_results['Prediction'].value_counts()
     fig, ax = plt.subplots()
     colors = ['green' if label == 'Normal' else 'red' for label in pie_data.index]
@@ -174,7 +176,7 @@ if uploaded_file is not None:
     st.pyplot(fig)
 
     # Bar chart
-    st.markdown("<h3  class='blue-bg' style='color: white;'>Bar Chart</h3>", unsafe_allow_html=True)
+    st.markdown("<h3   style='color: white; background-color: pink'>Bar Chart</h3>", unsafe_allow_html=True)
     bar_data = all_results['Prediction'].value_counts()
     fig, ax = plt.subplots()
     colors = ['green' if label == 'Normal' else 'red' for label in bar_data.index]
