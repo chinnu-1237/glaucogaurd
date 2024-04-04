@@ -124,8 +124,8 @@ st.markdown("""
 if uploaded_file is not None:
     # Display uploaded image
     original_image = Image.open(uploaded_file)
-    st.image(original_image, caption="<div style='background-color: white; padding: 5px'><strong>Uploaded Image</strong></div>", use_column_width=True)
-
+    st.image(original_image,  use_column_width=True)
+    st.markdown("<div style='background-color: white; padding: 5px'><strong>Uploaded Image</strong></div>", unsafe_allow_html=True)
     # Perform glaucoma detection
     with st.spinner("Detecting glaucoma..."):
         processed_image = preprocess_image(original_image)
