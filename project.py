@@ -145,6 +145,7 @@ if uploaded_file is not None:
         .dataframe {{ 
             background-color: white;
             width: 100%; /* Set width to 100% */
+            table-layout: fixed;
             padding: 10px; /* Add padding */
         }}
     </style>
