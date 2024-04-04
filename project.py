@@ -153,15 +153,16 @@ if uploaded_file is not None:
     st.dataframe(all_results)
     new_result = pd.DataFrame({"Image": [uploaded_file.name], "Prediction": [prediction]})
     all_results = pd.concat([new_result, all_results], ignore_index=True)
+    if not all_results.empty:
+    st.markdown("---")
+    st.subheader("Detection Results")
+    st.table(all_results.style.applymap(lambda x: 'color: red' if x == 'Glaucoma' else 'color: green', subset=['Prediction']))
 
     # Save updated results to CSV
     all_results.to_csv("results.csv", index=False)
 
 # Display all results in table with black background color
-if not all_results.empty:
-    st.markdown("---")
-    st.subheader("Detection Results")
-    st.table(all_results.style.applymap(lambda x: 'color: red' if x == 'Glaucoma' else 'color: green', subset=['Prediction']))
+
 
     # Pie chart
     st.markdown("<h3  class='blue-bg' style='color: white;'>Pie Chart</h3>", unsafe_allow_html=True)
