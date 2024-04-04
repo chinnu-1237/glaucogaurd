@@ -108,21 +108,15 @@ else:
 
 # Sidebar for uploading image
 st.markdown("""<p style='font-size: 20px;  background-color: pink; color: black;'>Upload an image for glaucoma detection (Max size: 200 MB)</p>""", unsafe_allow_html=True)
+st.empty()
 uploaded_file = st.file_uploader(" ",type=["png", "jpg", "jpeg"], accept_multiple_files=False, key="file_uploader", help="Upload an image for glaucoma detection (Max size: 200 MB)")
 st.markdown("""
     <style>
-        .stHelp.st-cc:before {
-            content: "?";
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            line-height: 20px;
-            text-align: center;
-            border-radius: 50%;
+        div[data-testid="stBlock"] {
             background-color: white;
-            color: black;
-            font-weight: bold;
-            margin-right: 5px;
+            padding: 10px; /* Adjust padding as needed */
+            border-radius: 10px; /* Add rounded corners */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
         }
     </style>
 """, unsafe_allow_html=True)
