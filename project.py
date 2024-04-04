@@ -120,6 +120,7 @@ st.markdown("""
         }
     </style>
 """, unsafe_allow_html=True)
+with st.container() as file_uploader_container:
 uploaded_file = st.file_uploader("Upload Image", type=["png", "jpg", "jpeg"], accept_multiple_files=False, key="file_uploader", help="Upload an image for glaucoma detection (Max size: 200 MB)")
 
 # Main content area
