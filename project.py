@@ -107,6 +107,19 @@ else:
     all_results = pd.read_csv("results.csv")
 
 # Sidebar for uploading image
+st.markdown("""
+    <style>
+        .file-uploader-section {
+            background-color: white;
+            padding: 20px; /* Adjust padding as needed */
+            border-radius: 10px; /* Add rounded corners */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
+        }
+        .st-bv, .st-bw, .st-cc {
+            background-color: white !important;
+        }
+    </style>
+""", unsafe_allow_html=True)
 uploaded_file = st.file_uploader("Upload Image", type=["png", "jpg", "jpeg"], accept_multiple_files=False, key="file_uploader", help="Upload an image for glaucoma detection (Max size: 200 MB)")
 
 # Main content area
