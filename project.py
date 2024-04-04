@@ -152,7 +152,7 @@ if uploaded_file is not None:
     unsafe_allow_html=True
 )
 
-    st.dataframe(all_results)
+    
     new_result = pd.DataFrame({"Image": [uploaded_file.name], "Prediction": [prediction]})
     all_results = pd.concat([new_result, all_results], ignore_index=True)
     if not all_results.empty:
@@ -167,7 +167,7 @@ if uploaded_file is not None:
 
 
     # Pie chart
-    st.markdown("<h3  style='color: white; background-color: pink'>Pie Chart</h3>", unsafe_allow_html=True)
+    st.markdown("<h3  style='color: black; background-color: pink'>Pie Chart</h3>", unsafe_allow_html=True)
     pie_data = all_results['Prediction'].value_counts()
     fig, ax = plt.subplots()
     colors = ['green' if label == 'Normal' else 'red' for label in pie_data.index]
@@ -176,7 +176,7 @@ if uploaded_file is not None:
     st.pyplot(fig)
 
     # Bar chart
-    st.markdown("<h3   style='color: white; background-color: pink'>Bar Chart</h3>", unsafe_allow_html=True)
+    st.markdown("<h3   style='color: black; background-color: pink'>Bar Chart</h3>", unsafe_allow_html=True)
     bar_data = all_results['Prediction'].value_counts()
     fig, ax = plt.subplots()
     colors = ['green' if label == 'Normal' else 'red' for label in bar_data.index]
