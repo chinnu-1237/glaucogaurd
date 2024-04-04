@@ -138,6 +138,19 @@ if uploaded_file is not None:
         st.markdown("<p class='green-bg'>Your eyes are healthy.</p>", unsafe_allow_html=True)
 
     # Add new result to DataFrame
+
+    st.markdown(
+    f"""
+    <style>
+        .dataframe {{ 
+            background-color: white;
+        }}
+    </style>
+    """, 
+    unsafe_allow_html=True
+)
+
+st.dataframe(all_results)
     new_result = pd.DataFrame({"Image": [uploaded_file.name], "Prediction": [prediction]})
     all_results = pd.concat([new_result, all_results], ignore_index=True)
 
